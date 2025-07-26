@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Task 3 - Responsive, Quiz, API</title>
+  <style>
+    /* Basic layout */
+    body {
+      font-family: sans-serif;
+      margin: 20px;
+    }
+
+    section {
+      margin-bottom: 40px;
+    }
+
+    /* Media Queries for responsiveness */
+    @media (max-width: 768px) {
+      body {
+        background-color: #f0f0f0;
+        font-size: 14px;
+      }
+    }
+
+    @media (min-width: 769px) {
+      body {
+        background-color: #ffffff;
+        font-size: 16px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Task 3 - Internship Project</h1>
+
+  <!-- ✅ Objective 1: Responsive Design -->
+  <section>
+    <h2>Responsive Test</h2>
+    <p>Resize the browser window to see font size and background color change.</p>
+  </section>
+
+  <!-- ✅ Objective 2: Interactive Quiz -->
+  <section>
+    <h2>Simple Quiz</h2>
+    <p>Question: What is the capital of India?</p>
+    <button onclick="checkAnswer('Mumbai')">Mumbai</button>
+    <button onclick="checkAnswer('Delhi')">Delhi</button>
+    <button onclick="checkAnswer('Chennai')">Chennai</button>
+    <p id="quizResult"></p>
+  </section>
+
+  <!-- ✅ Objective 3: External API Fetch -->
+  <section>
+    <h2>Get a Random Joke (API)</h2>
+    <button onclick="getJoke()">Click for Joke</button>
+    <p id="jokeOutput"></p>
+  </section>
+
+  <script>
+    // Quiz Function
+    function checkAnswer(answer) {
+      const result = document.getElementById("quizResult");
+      if (answer === "Delhi") {
+        result.innerText = "Correct!";
+      } else {
+        result.innerText = "Wrong! Try again.";
+      }
+    }
+
+    // Joke API Function
+    function getJoke() {
+      fetch("https://icanhazdadjoke.com/", {
+        headers: {
+          Accept: "application/json"
+        }
+      })
+      .then(response => response.json())
+      .then(data => {
+        document.getElementById("jokeOutput").innerText = data.joke;
+      })
+      .catch(error => {
+        document.getElementById("jokeOutput").innerText = "Failed to fetch joke.";
+      });
+    }
+  </script>
+
+</body>
+</html>
